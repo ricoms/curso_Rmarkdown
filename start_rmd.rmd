@@ -1,0 +1,12 @@
+---
+title: "Start Rmarkdown"
+author: "Ricardo Manhaes Savii"
+date: "August 31, 2016"
+output: ioslides_presentation
+---
+
+# Github
+
+https://github.com/ricoms
+
+`git clone https://github.com/ricoms/rmarkdown_curso.git`
