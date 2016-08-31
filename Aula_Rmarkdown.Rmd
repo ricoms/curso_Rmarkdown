@@ -1,0 +1,449 @@
+---
+title: "Aula Rmarkdown"
+author: "Ricardo Manhaes Savii"
+date: "30 de Agosto de 2016"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introdução
+
+Para utilizarmos o *rmarkdown* precisamos primeiro instalar todas suas dependências, para isso, precisamos:
+
+* instalar R - https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04
+* instalar RStudio - https://www.rstudio.com/products/rstudio/download3/
+* instalar rmarkdown - tendo instalado os dois acima, dentro do R aplicar o seguinte comando:
+
+```
+install.packages("rmarkdown")
+```
+
+informações oficiais sobre o pacote _rmarkdown_ podem ser encontradas neste link: http://rmarkdown.rstudio.com/
+
+Há muitos tutoriais e informações online, mas uma referência principal são as famosas cheatsheets do R:
+
+* rmarkdown-cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
+* E o tutorial oficial Pandoc-rmarkdown: http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html
+
+Muito bem, acompanhando o material acima e nosso amigo *Google* conseguirá tirar a maioria de suas dúvidas. Agora veremos um catado das referências acima, de coisas mais comuns e utilizadas para criar seus próprios textos (e tarefas de estatística) com *rmarkdown*.
+
+Ah! Já ia me esquecendo: não é o caso de vocês, mas muitos não entendem profundamente o que quer dizer **open source**. Significa que o código está disponível e que a qualidade da linguagem depende da ajuda da comunidade. Então, se algum dia quiser ajudar à desenvolver o **rmarkdown**, este é o projeto público em desenvolvimento e você pode ajudar: https://github.com/rstudio/rmarkdown
+
+E muitos outros projetos **open source** estão disponíveis no github, tem muita coisa interessante e é uma ótima oportunidade de aprender a trabalhar com código, projetos e dados reais.
+
+# Markdown
+
+**O que é:** _"Markdown é uma ferramenta de conversão text-to-HTML para escritores web. Markdown permite você escrever um formato de texto simples de ler, de escrever, e converte-lo para um XHTML (ou HTML) estruturalmente válido."_
+
+_Logo, 'Markdown' é duas coisas: (1) uma sintáxe de formatação de texto simples; e (2) uma ferramenta de software, escrito em Perl, que converte um texto de formatação simples para HTML.""_
+
+Traduzido da fonte: https://daringfireball.net/projects/markdown/
+
+Com isso o projeto Rmarkdown utilizou o fundamento criado pelo projeto markdown para implementar documentação dinâmica. Logo os comandos de markdown são todos válidos no ambiente do rmardown dentro do RStudio.
+
+## Como criar títulos
+
+Um título de estílo setext (*Setext-style*) é uma linha "sublinhada" (com outra linha embaixo) contendo vários **=** (para nível 1) ou **-** (para nível 2). Conforme abaixo:
+
+```
+Um título de nível 1
+====================
+
+Um título de nível 2
+--------------------
+```
+
+O título pode conter formatação na própria linha (*inline formatting* ou **ATX-syle**), utilizando o símbolo **#**.
+
+```
+# Um título de nível 1
+
+## Um título de nível 2
+
+### Um título de nível 3
+```
+
+Sendo que é uma questão de preferência, ambos os códigos abaixo irão gerar a mesma saída.
+
+```
+# Um título de nível 1 [link](/url) and *emphasis*
+
+Um título de nível 1 [link](/url) and *emphasis*
+=================================================
+```
+
+### Dica avançada:
+
+Títulos podem ter atributos utilizando sintáxe ao final da linha (esta sintáxe é compatível com [PHP Markdown Extra](/https://michelf.ca/projects/php-markdown/extra/))
+
+```
+{#identifier .class .class key=value key=value}
+```
+
+Não entraremos em muitos detalhes disto, mas fica como referência para estudos avançados. Um exemplo rápido disto é o título da seguinte seção, ele está escrito da seguinte forma:
+
+```
+## Comandos rmd {#comandos_rmd}
+```
+
+O que permite que criar um link [Comandos rmd](#comandos_rmd) que te leve até a seção se clica-lo. É uma boa idéia para fazer índices, não?
+
+## Comandos rmd {#comandos_rmd}
+
+É importante entender que é possível escrever html dentro do arquivo **markdown**, porém, nem todo html será aceito no **R**markdown. Um exemplo são os dois códigos abaixo:
+
+```
+A First Level Header
+====================
+
+A Second Level Header
+---------------------
+
+Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.
+
+The quick brown fox jumped over the lazy
+dog's back.
+
+### Header 3
+
+> This is a blockquote.
+> 
+> This is the second paragraph in the blockquote.
+>
+> ## This is an H2 in a blockquote
+```
+
+O markdown acima é equivalente ao html abaixo:
+
+```
+<h1>A First Level Header</h1>
+
+<h2>A Second Level Header</h2>
+
+<p>Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.</p>
+
+<p>The quick brown fox jumped over the lazy
+dog's back.</p>
+
+<h3>Header 3</h3>
+
+<blockquote>
+    <p>This is a blockquote.</p>
+
+    <p>This is the second paragraph in the blockquote.</p>
+
+    <h2>This is an H2 in a blockquote</h2>
+</blockquote>
+```
+
+Porém, você não terá o mesmo resultado.
+
+Mas, veremos que o **R**markdown tem muita coisa também.
+
+### Ênfase no texto
+
+```
+Algumas destas palavras *estão enfatizadas*.
+Algumas destas palavras _estão enfatizadas_.
+
+Use dois asteriscos para **ênfase forte**.
+Ou, se preferir, __use dois sublinhados__.
+```
+
+### Riscar texto (*Strikeout*)
+
+```
+Isto é um ~~texto riscado.~~
+```
+
+### Super-escrito e sub-escrito
+
+```
+H~2~O is a liquid.  2^10^ is 1024.
+```
+
+### Listas
+
+```
+*   Doces
+*   Chiclete
+*   Cerveja
+
+ou
+
++   Doces
++   Chiclete
++   Cerveja
+
+ou
+
+-   Doces
+-   Chiclete
+-   Cerveja
+```
+
+Todos produzem a mesma saída.
+
+#### Listas numeradas
+
+```
+1. Magenta
+2. Verde
+3. Azul
+```
+
+Se você quiser listas identadas, basta identas com 4 espaços ou 1 tab.
+
+```
+*   A list item.
+    *   With multiple paragraphs.
+*   Another item in the list.
+```
+
+## Links
+
+Rmarkdown suporta a criação de dois estilos de links: *inline* e *referência*. Com ambos os estilos você usa, [] para delimitar o texto que quer transformar em link.
+
+*Inline-style* usa parêntesis imediatamente após o texto à se *'linkado'*.
+
+```
+Isto é um [exemplo de link](http://exemplo.com/).
+```
+
+Opcionalmente, você pode incluir um título como atributo no parêntesis:
+
+```
+Isto é um [exemplo de link](http://exemplo.com/ "Com um Título").
+```
+
+*Reference-style* links permitem você referências os links por nome, que você define em algum outro lugar de seu documento:
+
+```
+Eu recebo 10 vezes mais do [Google][1] do que do
+[Yahoo][2] ou [MSN][3].
+
+[1]: http://google.com/        "Google"
+[2]: http://search.yahoo.com/  "Yahoo Search"
+[3]: http://search.msn.com/    "MSN Search"
+```
+
+O atributo do título é opcional. Nomes de links podem conter letras, números e espaços, não são são sensíveis ao case (*not case sensitive*):
+
+```
+I start my morning with a cup of coffee and
+[The New York Times][NY Times].
+
+[ny times]: http://www.nytimes.com/
+```
+
+## Imagens
+
+Sintáxe de imagens é bem parecida com sintáxe de links:
+
+*Inline* (títulos são opcionais)
+
+```
+![alt text](/path/to/img.jpg "Title")
+```
+
+*Reference-style*:
+
+```
+![alt text][id]
+
+[id]: /path/to/img.jpg "Title"
+```
+
+## Tabelas
+
+Quatro tipos de tabelas podem ser usadas. As primeiras três pressupõem o uso de uma fonte com largura fixa, como um *Courier*. O quarto tipo pode ser usado com fontes espaçadas proporcionalmente, que não requer alinhamento das colunas.
+
+### Tabelas simples
+
+```
+  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1
+
+Table:  Demonstration of simple table syntax.
+```
+
+### Tabelas com linhas múltiplas
+
+Tabelas multilinhas permitem títulos de colunas e linhas de la tabla que abarcam múltiplas líneas de texto (mas células que abarcam múltiplas linhas da tabela não são suportadas). Aqui há um exemplo:
+
+```
+-------------------------------------------------------------
+ Centered   Default           Right Left
+  Header    Aligned         Aligned Aligned
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here's another one. Note
+                                    the blank line between
+                                    rows.
+-------------------------------------------------------------
+
+Table: Here's the caption. It, too, may span
+multiple lines.
+```
+
+### Tabelas com grid
+
+Tabelas de grid são feitas da seguinte forma:
+
+```
+: Sample grid table.
+
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+
+```
+
+### Tabelas Pipe
+
+Pipe tables são assim:
+
+```
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+  : Demonstration of pipe table syntax.
+```
+
+#### Dica avançada
+
+A sintaxe desta tabela é idêntica ao [PHP Markdown Extra tables](https://michelf.ca/projects/php-markdown/extra/#table).
+
+### Matemática
+
+*Latex*, use com \$ ou \$$ da seguinte forma:
+
+```
+$S = \left( \sum\limits_{i=1}^n x_i * c \right)$
+
+$$A = \int_a^b \! f(x) \, \mathrm{d}x$$
+```
+
+Também é interessante a possibilidade de notação científica como:
+$\beta$ `$\beta$`, $\epsilon$ `$\epsilon$`, $\theta$ `$\theta$`, $\Theta$ `$\Theta$`, $\rightarrow$ `$\rightarrow$`, $\leq$ `$\leq$`, $\geq$ `$\geq$`, $\approx$ `$\approx$`, $\bowtie$ `$\bowtie$`
+
+Tem muitos, no google você encontra algumas tabelas: http://detexify.kirelabs.org/symbols.html
+
+
+# Blocos de código
+
+## Blocos identados
+
+Um bloco de texto identado com 4 espaços (ou 1 tab) é tratado como um texto **verbatim**: o que é, caractéres especiais não ativam formatações especiais, e todos os espaços e quebras de linha são preservadas. Por exemplo,
+
+```
+    if (a > 3) {
+      moveShip(5 * gravity, DOWN);
+    }
+```
+
+## Blocos 'gradeados' (*Fenced code blocks*)
+
+Como adicional aos blocos identados, **pandoc** suporta blocos gradeados. Estes começam com uma linha de três ou mais tildes (~) e terminam com uma linha de tildes, ao menos, com o mesmo número da linha de início. Tudo entre estas linhas é tratado como código. Identação não é necessária:
+
+~~~~~~~
+if (a > 3) {
+  moveShip(5 * gravity, DOWN);
+}
+~~~~~~~
+
+## Blocos de compilação
+
+Os blocos de compilação são bem diferentes dos blocos de código anteriores, o código dentro dele será compilado pelo RStudio, e é onde a magia acontece.
+Para começar um bloco à ser compilado ulizam-se três (`) acentos crase, e indica-se a linguagem que será utilizada entre ({}) chaves, conforme abaixo:
+
+<br/><br/><pre><code>```{r nome_do_bloco}</code></pre>
+
+Para fechar seu bloco de código, feche-o com outros três acentos crase (`).
+
+<br/><br/><pre><code>```</code></pre>
+
+### Opções de compilação
+
+A linha inicial pode incluir várias opções. Por exemplo, `echo=FALSE` indica que o código não será mostrado no documento final (porém qualquer resultado do código será mostrado sim).
+
+<br/><br/><pre><code>```{r chunk_name, echo=FALSE}
+x <- rnorm(100)
+y <- 2*x + rnorm(100)
+cor(x, y)
+```</code></pre>
+
+Você usa `results="hide"` para esconder o resultado (mas o código será mostrado)
+
+<br/><br/><pre><code>```{r chunk_name, results="hide"}
+x <- rnorm(100)
+y <- 2*x + rnorm(100)
+cor(x, y)
+```</code></pre>
+
+Você usa `include=FALSE` para ter um bloco avaliado, mas nem o código e nem o seu resultado serão mostrados.
+
+<br/><br/><pre><code>```{r chunk_name, include=FALSE}
+x <- rnorm(100)
+y <- 2*x + rnorm(100)
+cor(x, y)
+```</code></pre>
+
+Se eu estou escrevendo um relatório para um colaborador,  eu normalmente uso `include=FALSE` para suprimir o código e só incluir as figuras.
+
+E para figuras, você pode usar as opções como `fig.width` e `fig.height`. Por exemplo:
+
+<br/><br/><pre><code>```{r scatterplot, fig.width=8, fig.height=6}
+plot(x,y)
+```</code></pre>
+
+Note que se `include=FALSE`, todo o código, resultados, e figuras serão suprimidas. Se `include=TRUE` e `results="hide"`, os resultados serão suprimidos mas as figuras serão mostradas. Para esconder as figuras, use `fig.show="hide"`.
+
+Há muitas outras [“opções de blocos”](http://yihui.name/knitr/options/#chunk_options). Cada uma deve ser código R real, já que R será usado para avalia-las. Logo `results=hide` **é errado**; você precisa usar `results="hide"`.
+
+## Codigo Inline
+
+```{r}
+x <- 1+1
+```
+
+Tendo a variável definida antes, em um bloco de código ou inline, podemos escrever:
+
+Código R *inline* tambem é suportado, e.g. o valor de `x` é `r x`, e 2 &times; &pi;
+= `r 2*pi`.
+
+# Por quê usar markdown e **R**markdown?
+
+* http://brettterpstra.com/2011/08/31/why-markdown-a-two-minute-explanation/
+
+* http://yihui.name/knitr/
+
+* http://rpubs.com/ricoms/205253
+
+* http://rmarkdown.rstudio.com/gallery.html
+    * https://github.com/svmiller/svm-r-markdown-templates
+    * http://timelyportfolio.github.io/rCharts_nyt_home_price/
+    * https://bookdown.org/yihui/bookdown/

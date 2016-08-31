@@ -1,0 +1,120 @@
+---
+title: "Simulaçao de Sistemas"
+author: "Ricardo Manhaes Savii"
+date: "August 30, 2016"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Simulação de Sistemas
+
+profe. Camila Martins
+
+## Geração de números aleatórios
+
+> * Determinísticas
+>   * pseudoaleatorias ou quase aleatórias
+> * Aleatórios
+
+# Método 1: Meio dos Quadrados (1949)
+
+Algoritmo:
+
+(1) é dado um valor inicial
+
+(2) eleva-se esse valor ao quadrado
+
+(3) toma-se como próximo valor da seq. a parte central dos dígitos
+
+# Exemplo do método do meio dos quadrados
+
+Ex:
+      
+$x_1 = 17$   $\rightarrow x_1^2 = 289 \rightarrow 0289$
+
+$x_2 = 28$   $\rightarrow x_2^2 = 784 \rightarrow 0784$
+
+$x_3 = 78$   $\rightarrow x_2^2 = 6084 \rightarrow 6084$
+
+$x_4 = 08$ 
+
+## Obsevação
+
+Para gerar realizações de uma distribuição uniforme, precisamos gerar sequência que se comportam de forma **aleatoria**. Ou seja:
+
+* Não previsivel
+* Não possa ser reproduzida por um mecanismo determinístico
+
+# Método 2: Gerador Congruencial linear
+
+$$x_n = (a x_{n-1} + c) \mod m$$
+
+em que:
+
+* m: módulo (m > 0)
+* a: multiplicador (0 $\leq$ a < m)
+* c: incremento (0 $\leq$ c < m)
+* $x_0$: valor inicial ou semente (0 $\leq$ $x_0$ $\leq$ m)
+
+A funçao *Z mod m* da o resto da divisao inteira de *Z* por m.
+
+* $Un = \dfrac{x_n}{m} \rightarrow$ nº pseudoaleatório $\approx$ v.a. Unif(0, 1)
+
+# Exemplo método 2
+
+Ex1: Sejam $x_0 = a = c = 7$ e $m = 10$. Logo,
+
+* $x_1 = (7 \times 7 + 7) \mod 10 = 56 \mod 10 = 6$
+* $x_2 = (7 \times 6 + 7) \mod 10 = 49 \mod 10 = 9$
+* $x_3 = (7 \times 9 + 7) \mod 10 = 70 \mod 10 = 0$
+* $x_4 = 7$
+* $x_5 = 6$
+* $\ldots$
+
+# Método 3: Gerador Congruêncial Multiplicativo
+
+$$X_n = (a x_{n01}) \mod m$$
+
+gerador padrão: $a = 7^5$ e $m = 2^{31} -1$
+
+Em geral, as constantes *a*, *c* e *m* devem ser escolhidas satisfazendo 3 critérios:
+
+(1) Para qualquer semente inicial, a sequência resultante tem a "aparência" de ser uma sequência de variável aletório (v.a.) Unif(0, 1) independente.
+
+(2) Para qualquer semente inicial, o nº de vairáveis que pode ser gerado antes de iniciar a repetição é grande
+
+(3) Os valores podem ser computados eficientemente em um computador.
+> * Obs.: Os valores não podem ter correlação
+
+# No R como fazemos?
+
+$$R$$
+
+$$runif(n, min, max)$$
+
+$$runif(n)$$
+
+# Exercício:
+
+Crie uma função no R que implemente o gerador congruêncial linear:
+
+$X_n = (a x_{n-1} + c) \mod m$
+e obtenha $Un = \dfrac{x_n}{m}$
+
+A função deverá ter como argumentos de entrada os valores *a*, *c*, *m*, $x_0$ e *n* e como saída a sequência de comprimento *n*. Verificar para $x_0 = 0$, $m = 16$, $a = 5$ e $c = 1$.
+
+```{r, echo=T}
+gcl = function(a = 5, c = 1, m = 16, x0 = 0, n) {
+  v = c()
+  v = append(v, x0)
+  for (i in 2:n)
+    v = append( v, (a*v[i-1] + c) %% m )
+  v
+}
+
+a = gcl(n = 10)
+a
+```
