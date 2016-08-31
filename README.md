@@ -17,9 +17,8 @@ Para utilizarmos o *rmarkdown* precisamos primeiro instalar todas suas dependên
 * instalar R - https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04
 * instalar RStudio - https://www.rstudio.com/products/rstudio/download3/
 * (opcional) instalar pandoc - http://pandoc.org/installing.html
+    * pandoc é necessário para gerar arquivos .pdf
 * instalar rmarkdown - tendo instalado os dois acima, dentro do R aplicar o seguinte comando:
-
-Observação: instalar **pandoc** é necessário para gerar arquivos .pdf
 
 ```
 install.packages("rmarkdown")
