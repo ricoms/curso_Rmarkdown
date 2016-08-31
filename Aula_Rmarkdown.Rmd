@@ -3,6 +3,9 @@ title: "Aula Rmarkdown"
 author: "Ricardo Manhaes Savii"
 date: "30 de Agosto de 2016"
 output:
+  pdf_document:
+    toc: true
+    number_sections: true
   html_document:
     toc: true
     number_sections: true
@@ -25,6 +28,12 @@ install.packages("rmarkdown")
 ```
 
 informações oficiais sobre o pacote _rmarkdown_ podem ser encontradas neste link: http://rmarkdown.rstudio.com/
+
+Um problema comum de acontecer com a geração de pdf no Linux, é o pacote
+
+```
+sudo apt-get install lmodern
+```
 
 Há muitos tutoriais e informações online, mas uma referência principal são as famosas cheatsheets do R:
 
@@ -432,7 +441,7 @@ x <- 1+1
 
 Tendo a variável definida antes, em um bloco de código ou inline, podemos escrever:
 
-Código R *inline* tambem é suportado, e.g. o valor de `x` é `r x`, e 2 &times; &pi;
+Código R *inline* tambem é suportado, e.g. o valor de `x` é `r x`, e $2 \times  \pi$
 = `r 2*pi`.
 
 # Por quê usar markdown e **R**markdown?

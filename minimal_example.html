@@ -123,6 +123,7 @@ $(document).ready(function () {
 <p>This is a minimal example of using <strong>knitr</strong> to produce an <em>HTML</em> page from <em>Markdown</em>.</p>
 <div id="r-code-chunks" class="section level2">
 <h2>R code chunks</h2>
+<p>Aqui eu abri <strong><em>um bloco</em></strong> de código</p>
 <pre class="r"><code># set global chunk options: images will be 7x5 inches
 knitr::opts_chunk$set(fig.width=7, fig.height=5)
 options(digits = 4)</code></pre>
@@ -141,7 +142,7 @@ with(mtcars, {
 </div>
 <div id="inline-code" class="section level2">
 <h2>Inline code</h2>
-<p>Inline R code is also supported, e.g. the value of <code>x</code> is 2, and 2 × π = 6.2832.</p>
+<p>Inline R code is also supported, e.g. the value of <code>x</code> is 3, and 2 × <span class="math inline">\(\pi\)</span>; <span class="math inline">\(\beta\)</span> = 6.2832.</p>
 </div>
 <div id="math" class="section level2">
 <h2>Math</h2>
@@ -153,7 +154,7 @@ with(mtcars, {
 <ol style="list-style-type: decimal">
 <li><p>the area of a circle with radius x</p>
 <pre class="r"><code>pi * x^2</code></pre>
-<pre><code>## [1] 12.57</code></pre></li>
+<pre><code>## [1] 28.27</code></pre></li>
 <li><p>OK, that is great</p></li>
 </ol>
 <p>To compile me, use</p>

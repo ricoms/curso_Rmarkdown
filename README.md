@@ -10,6 +10,22 @@ Abra seu terminal, vá para sua pasta de trabalho e aplique o seguinte código:
 
 * git clone https://github.com/ricoms/rmarkdown_curso.git
 
+# Como instalar os requisitos do projeto
+
+Para utilizarmos o *rmarkdown* precisamos primeiro instalar todas suas dependências, para isso, precisamos:
+
+* instalar R - https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04
+* instalar RStudio - https://www.rstudio.com/products/rstudio/download3/
+* (opcional) instalar pandoc - http://pandoc.org/installing.html
+* instalar rmarkdown - tendo instalado os dois acima, dentro do R aplicar o seguinte comando:
+
+Observação: instalar **pandoc** é necessário para gerar arquivos .pdf
+
+```
+install.packages("rmarkdown")
+```
+
+informações oficiais sobre o pacote _rmarkdown_ podem ser encontradas neste link: http://rmarkdown.rstudio.com/
 
 # Observações
 

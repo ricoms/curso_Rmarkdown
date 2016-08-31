@@ -4,6 +4,8 @@ This is a minimal example of using **knitr** to produce an _HTML_ page from _Mar
 
 ## R code chunks
 
+Aqui eu abri ***um bloco*** de código
+
 ```{r setup}
 # set global chunk options: images will be 7x5 inches
 knitr::opts_chunk$set(fig.width=7, fig.height=5)
@@ -11,6 +13,7 @@ options(digits = 4)
 ```
 
 Now we write some code chunks in this markdown file:
+
 
 ```{r computing}
 x <- 1+1 # a simple calculator
@@ -20,7 +23,7 @@ rnorm(5)  # boring random numbers
 
 We can also produce plots:
 
-```{r graphics}
+```{r}
 par(mar = c(4, 4, .1, .1))
 with(mtcars, {
   plot(mpg~hp, pch=20, col='darkgray')
@@ -30,7 +33,7 @@ with(mtcars, {
 
 ## Inline code
 
-Inline R code is also supported, e.g. the value of `x` is `r x`, and 2 &times; &pi;
+Inline R code is also supported, e.g. the value of `x` is `r x=3; x`, and 2 &times; $\pi$; $\beta$
 = `r 2*pi`.
 
 ## Math
