@@ -387,11 +387,11 @@ if (a > 3) {
 ## Blocos de compilação
 
 Os blocos de compilação são bem diferentes dos blocos de código anteriores, o código dentro dele será compilado pelo RStudio, e é onde a magia acontece.
-Para começar um bloco à ser compilado ulizam-se três (`) acentos crase, e indica-se a linguagem que será utilizada entre ({}) chaves, conforme abaixo:
+Para começar um bloco à ser compilado ulizam-se três (\`) acentos crase, e indica-se a linguagem que será utilizada entre ({}) chaves, conforme abaixo:
 
 <br/><br/><pre><code>```{r nome_do_bloco}</code></pre>
 
-Para fechar seu bloco de código, feche-o com outros três acentos crase (`).
+Para fechar seu bloco de código, feche-o com outros três acentos crase (\`).
 
 <br/><br/><pre><code>```</code></pre>
 
@@ -431,7 +431,7 @@ plot(x,y)
 
 Note que se `include=FALSE`, todo o código, resultados, e figuras serão suprimidas. Se `include=TRUE` e `results="hide"`, os resultados serão suprimidos mas as figuras serão mostradas. Para esconder as figuras, use `fig.show="hide"`.
 
-Há muitas outras [“opções de blocos”](http://yihui.name/knitr/options/#chunk_options). Cada uma deve ser código R real, já que R será usado para avalia-las. Logo `results=hide` **é errado**; você precisa usar `results="hide"`.
+Há muitas outras [“opções de blocos”](http://yihui.name/knitr/options/#chunk_options). Cada uma deve ser código R real, já que R será usado para avalia-las.
 
 ## Codigo Inline
 
