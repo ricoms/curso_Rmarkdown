@@ -399,35 +399,35 @@ Para fechar seu bloco de código, feche-o com outros três acentos crase (\`).
 
 A linha inicial pode incluir várias opções. Por exemplo, `echo=FALSE` indica que o código não será mostrado no documento final (porém qualquer resultado do código será mostrado sim).
 
-<br/><br/><pre><code>```{r chunk_name, echo=FALSE}
+<br/><br/><pre><code>```{r chunk_name, echo=FALSE}</code></pre>
 x <- rnorm(100)
 y <- 2*x + rnorm(100)
 cor(x, y)
-```</code></pre>
+<br/><br/><pre><code>```</code></pre>
 
 Você usa `results="hide"` para esconder o resultado (mas o código será mostrado)
 
-<br/><br/><pre><code>```{r chunk_name, results="hide"}
+<br/><br/><pre><code>```{r chunk_name, results="hide"}</code></pre>
 x <- rnorm(100)
 y <- 2*x + rnorm(100)
 cor(x, y)
-```</code></pre>
+<br/><br/><pre><code>```</code></pre>
 
 Você usa `include=FALSE` para ter um bloco avaliado, mas nem o código e nem o seu resultado serão mostrados.
 
-<br/><br/><pre><code>```{r chunk_name, include=FALSE}
+<br/><br/><pre><code>```{r chunk_name, include=FALSE}</code></pre>
 x <- rnorm(100)
 y <- 2*x + rnorm(100)
 cor(x, y)
-```</code></pre>
+<br/><br/><pre><code>```</code></pre>
 
 Se eu estou escrevendo um relatório para um colaborador,  eu normalmente uso `include=FALSE` para suprimir o código e só incluir as figuras.
 
 E para figuras, você pode usar as opções como `fig.width` e `fig.height`. Por exemplo:
 
-<br/><br/><pre><code>```{r scatterplot, fig.width=8, fig.height=6}
+<br/><br/><pre><code>```{r scatterplot, fig.width=8, fig.height=6}</code></pre>
 plot(x,y)
-```</code></pre>
+<br/><br/><pre><code>```</code></pre>
 
 Note que se `include=FALSE`, todo o código, resultados, e figuras serão suprimidas. Se `include=TRUE` e `results="hide"`, os resultados serão suprimidos mas as figuras serão mostradas. Para esconder as figuras, use `fig.show="hide"`.
 
